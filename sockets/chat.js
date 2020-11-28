@@ -7,7 +7,9 @@ module.exports = (io, socket, onlineUsers, channels) => {
       //Save the username to socket as well. This is important for later.
       socket["username"] = username;
       console.log(`✋ ${username} has joined the chat! ✋`);
-      io.emit("new user", username);
+      io.emit("new user", username, {
+        channels : channels,
+      });
     })
   
     socket.on('new message', (data) => {
@@ -32,11 +34,6 @@ module.exports = (io, socket, onlineUsers, channels) => {
     });
     
     socket.on('new channel', (newChannel) => {
-        console.log(newChannel);
-    })
-
-    
-    socket.on('new channel', (newChannel) => {
         //Save the new channel to our channels object. The array will hold the messages.
         channels[newChannel] = [];
         //Have the socket join the new channel room.
@@ -59,5 +56,5 @@ module.exports = (io, socket, onlineUsers, channels) => {
         messages : channels[newChannel]
         });
     })
-    
+
 }
