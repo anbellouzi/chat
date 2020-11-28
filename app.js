@@ -6,9 +6,11 @@ const server = require('http').Server(app);
 
 //Socket.io
 let onlineUsers = {};
+let channels = {"General" : []}
+
 const io = require('./node_modules/socket.io')(server);
 io.on("connection", (socket) => {
-    require('./sockets/chat.js')(io, socket, onlineUsers);
+    require('./sockets/chat.js')(io, socket, onlineUsers, channels);
 
 });
 
