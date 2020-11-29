@@ -34,12 +34,19 @@ module.exports = (io, socket, onlineUsers, channels) => {
     });
     
     socket.on('new channel', (newChannel) => {
+
+      if (newChannel in channels) {
+        console.log("Channel Already exists!")
+      } else {
         //Save the new channel to our channels object. The array will hold the messages.
         channels[newChannel] = [];
         //Have the socket join the new channel room.
         socket.join(newChannel);
         //Inform all clients of the new channel.
         io.emit('new channel', newChannel);
+      }
+
+        
         //Emit to the client that made the new channel, to change their channel to the one they made.
         socket.emit('user changed channel', {
           channel : newChannel,

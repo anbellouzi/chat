@@ -11,13 +11,13 @@
     <link href='/public/index.css' rel='stylesheet' type='text/css'></link>
   </head>
   <body>
-
+    
     <form class="username-form">
       <input id="username-input" placeholder="Username"></input>
       <button id="create-user-btn">Join Chat</button>
     </form>
 
-    <div class="main-container">
+    <div class="main-container hide">
       <div class="channels-and-users-online-container">
         <h1 class="brand">Make Chat</h1>
         <div class="channels">
@@ -27,6 +27,8 @@
         </div>
         <h2>Online Users</h2>
         <div class="users-online"></div>
+
+        <button id="logout-button" style=" padding:10px; color:white; background-color: red;">Log out</button>
       </div>
       <div class="chat-container">
         <div class="chat-container-fluid">

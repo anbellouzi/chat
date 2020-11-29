@@ -19,20 +19,33 @@ $(document).ready(()=>{
         socket.emit('new user', $('#username-input').val());
         // Save the current user when created
         currentUser = $('#username-input').val();
-        $('.username-form').remove();
+        // $('.username-form').removeClass('username-form');
+        // $('.username-form').removeClass('show');
+        // $('.username-form').addClass('hide');
+        $('.username-form').remove()
         $('.main-container').css('display', 'flex');
       }
     });
+
+    $('#logout-button').click((e)=>{
+      socket.emit('user has left');
+
+      $('.main-container').css('display', 'none');
+      
+      let body = $('body')
+      body.append(
+        "<form class='username-form'><input id='username-input' placeholder='Username'></input><button id='create-user-btn'>Join Chat</button></form>"
+      )
+      
+    });
+    
   
     
   
     //socket listeners
-    socket.on('new user', (username, channels) => {
+    socket.on('new user', (username) => {
       console.log(`${username} has joined the chat`);
       $('.users-online').append(`<div class="user-online">${username}</div>`);
-      for(channel in channels){
-        $('.channels').append(`<div class="channel">${newChannel}</div>`);
-      }
     })
     
     
